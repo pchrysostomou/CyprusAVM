@@ -1,0 +1,30 @@
+{
+  "features": [
+    "area_sqm",
+    "bedrooms",
+    "bathrooms",
+    "floor",
+    "property_age",
+    "distance_to_sea_km",
+    "distance_to_center_km",
+    "area_median_price_sqm",
+    "has_parking",
+    "has_sea_view",
+    "has_pool",
+    "has_garden",
+    "has_title_deed",
+    "is_tourist_area",
+    "is_apartment",
+    "is_villa",
+    "is_house",
+    "is_land",
+    "is_new_build",
+    "district_encoded",
+    "municipality_encoded",
+    "top_floor_bonus",
+    "ground_floor_penalty"
+  ],
+  "mape": 12.349855899810791,
+  "mae": 34938.63671875,
+  "r2": 0.9610648155212402
+}
