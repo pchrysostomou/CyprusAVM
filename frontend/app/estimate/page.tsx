@@ -8,10 +8,7 @@ import {
   type ComparableProperty,
   formatEuro,
 } from "@/lib/api";
-import { Download } from "lucide-react";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
-
+import { Printer } from "lucide-react";
 const DISTRICTS = [
   { value: "lemesos", label: "Λεμεσός" },
   { value: "lefkosia", label: "Λευκωσία" },
