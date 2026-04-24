@@ -75,3 +75,4 @@ To take this platform to production as a SaaS, you should:
 
 ## 📄 License
 This project is proprietary MVP software. All rights reserved.
+
