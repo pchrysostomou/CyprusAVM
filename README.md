@@ -71,6 +71,7 @@ npm run dev
 To take this platform to production as a SaaS, you should:
 1. **Incorporate Real Data:** Replace `backend/data/synthetic_properties.csv` with your proprietary dataset, and run `python backend/scripts/train_model.py`. The platform will automatically relearn, adjust encoding logic, and generate a new precision `xgboost.pkl` file!
 2. **Add a Payment Flow:** For B2B monetization, insert a standard **Stripe / PayPal Purchase Button** at the end of the valuation loading phase. The user should pay the fee *before* the precise result and the PDF report are revealed.
+3. **Refine PDF Generation:** The current PDF Export is an MVP native-print workaround and is **not yet production-ready**. A final SaaS version should feature a programmatic backend PDF generator (e.g., using Python ReportLab/WeasyPrint) to deliver a highly structured and heavily branded official document.
 
 ## 📄 License
 This project is proprietary MVP software. All rights reserved.
