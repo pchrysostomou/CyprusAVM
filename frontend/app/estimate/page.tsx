@@ -126,20 +126,8 @@ function ResultCard({
   const priceSqmDiff = ((result.price_per_sqm - result.area_median_price_sqm) / result.area_median_price_sqm) * 100;
   const today = new Date().toLocaleDateString("el-GR");
 
-  const exportPDF = async () => {
-    const el = document.getElementById("pdf-report-content");
-    if (!el) return;
-    try {
-      const canvas = await html2canvas(el, { scale: 2, backgroundColor: "#080C18", useCORS: true });
-      const imgData = canvas.toDataURL("image/jpeg", 1.0);
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save("CyprusAVM_Valuation_Report.pdf");
-    } catch (err) {
-      console.error("PDF generation failed", err);
-    }
+  const exportPDF = () => {
+    window.print();
   };
 
   return (
@@ -378,11 +366,11 @@ function ResultCard({
 
       <button
         onClick={exportPDF}
-        className="btn btn-secondary"
+        className="btn btn-secondary no-print"
         style={{ marginTop: 8, padding: "12px", fontSize: 14, width: "100%", display: "flex", justifyContent: "center", alignItems: "center", gap: 8 }}
       >
-        <Download size={18} />
-        Λήψη Αναφοράς (PDF)
+        <Printer size={18} />
+        Εκτύπωση / Αποθήκευση Αναφοράς (PDF)
       </button>
     </div>
   );

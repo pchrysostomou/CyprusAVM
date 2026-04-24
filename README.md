@@ -64,11 +64,13 @@ npm install
 npm run dev
 ```
 
-## 📊 Incorporating Real Data
-CyprusAVM is designed to adapt to your proprietary data effortlessly:
-1. Replace `backend/data/synthetic_properties.csv` with your real data (following the schema features).
-2. Run `python backend/scripts/train_model.py`.
-3. The platform will automatically relearn, adjust encoding logic, recompute municipality medians, and generate a new `xgboost_v1.pkl` file!
+## ⚠️ Production vs MVP (Important)
+
+> Please note that the current data inside this repository is **100% synthetic/fake**, generated exclusively for MVP demonstration purposes. The valuations returned right now represent the algorithm's functional logic, not real Cyprus market prices.
+
+To take this platform to production as a SaaS, you should:
+1. **Incorporate Real Data:** Replace `backend/data/synthetic_properties.csv` with your proprietary dataset, and run `python backend/scripts/train_model.py`. The platform will automatically relearn, adjust encoding logic, and generate a new precision `xgboost.pkl` file!
+2. **Add a Payment Flow:** For B2B monetization, insert a standard **Stripe / PayPal Purchase Button** at the end of the valuation loading phase. The user should pay the fee *before* the precise result and the PDF report are revealed.
 
 ## 📄 License
 This project is proprietary MVP software. All rights reserved.
