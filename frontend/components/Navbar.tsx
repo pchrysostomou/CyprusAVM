@@ -37,6 +37,13 @@ export default function Navbar() {
           >
             Αγορά
           </Link>
+          <Link
+            href="/feasibility"
+            id="nav-feasibility"
+            className={`nav-link ${pathname === "/feasibility" ? "active" : ""}`}
+          >
+            Feasibility
+          </Link>
         </div>
 
         <Link href="/estimate" className="btn btn-primary" id="nav-cta" style={{ fontSize: '14px', padding: '9px 20px' }}>
