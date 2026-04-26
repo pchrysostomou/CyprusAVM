@@ -100,10 +100,10 @@ export default function SiteIntelPage() {
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                 <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--success)", boxShadow: "0 0 6px var(--success)", display: "inline-block" }} />
-                <span style={{ fontSize: 11, color: "var(--success)", fontWeight: 700, letterSpacing: "0.06em" }}>LIVE · Cyprus Land Registry (DLS) · Demetra Engine · Real-Time</span>
+                <span style={{ fontSize: 11, color: "var(--success)", fontWeight: 700, letterSpacing: "0.06em" }}>LIVE · Cyprus Land Registry (DLS) · Site Score Engine · Real-Time</span>
               </div>
               <h1 style={{ fontSize: "clamp(18px,2.5vw,28px)", marginBottom: 4 }}>CyprusAVM — Site Intelligence Platform</h1>
-              <p style={{ color: "var(--text-secondary)", fontSize: 12 }}>Demetra Land Score · Build Envelope Calculator · Uplift Mechanisms · Investment Analysis</p>
+              <p style={{ color: "var(--text-secondary)", fontSize: 12 }}>Site Score · Build Envelope Calculator · Uplift Mechanisms · Investment Analysis</p>
             </div>
             {result && (
               <button onClick={() => {
@@ -227,10 +227,10 @@ export default function SiteIntelPage() {
                 </div>
               </div>
 
-              {/* DEMETRA LAND SCORE */}
+              {/* SITE SCORE */}
               {assessment && (
                 <div className="card">
-                  <ModuleHeader icon={<Activity size={15} />} title="Demetra Land Score — 5-Domain Site Assessment" color="#8B5CF6"
+                  <ModuleHeader icon={<Activity size={15} />} title="Site Score — 5-Domain Land Assessment" color="#8B5CF6"
                     badge={`Grade ${assessment.grade} · ${assessment.harvestScore}/100`}
                     sub={`5 domains · ${assessment.layersChecked || 16} data layers`} />
                   <div style={{ padding: 16 }}>

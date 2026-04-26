@@ -34,7 +34,7 @@ export function LandAssessmentModule({ distCode, zoneCode, isField, areaGIS, den
     <div className="card" style={{ overflow: "hidden" }}>
       <ModuleHeader icon={<TrendingUp size={16} />} title="Module 3 — Land Assessment (Harvest Score)" color="#8B5CF6"
         badge={loading ? "..." : data ? `Grade ${data.grade}` : undefined}
-        sub="Demetra-style scoring engine · 5 domains · 16 layers" />
+        sub="Site scoring engine · 5 domains · 16 layers" />
       <div style={{ padding: 20 }}>
         {loading && <div style={{ textAlign: "center", color: "var(--text-muted)", fontSize: 13, padding: 20 }}>Αξιολόγηση τεμαχίου...</div>}
         {data && (

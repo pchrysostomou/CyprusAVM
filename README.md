@@ -1,6 +1,6 @@
 # CyprusAVM — Site Intelligence Platform
 
-> **The first comprehensive land assessment and development feasibility platform for Cyprus — featuring live DLS REST API integration, Demetra Land Scoring Engine, 3D Build Envelope Calculator, and Investment Analysis.**
+> **The first comprehensive land assessment and development feasibility platform for Cyprus — featuring live DLS REST API integration, 5-Domain Site Scoring Engine, 3D Build Envelope Calculator, and Investment Analysis.**
 
 [![Live DLS API](https://img.shields.io/badge/DLS%20API-Live-brightgreen)](https://eservices.dls.moi.gov.cy)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org)
@@ -13,7 +13,7 @@
 **CyprusAVM** is a full-stack platform that enables real estate professionals, developers, and investors to:
 
 - **Look up any parcel** in Cyprus via the Land Registry (DLS) in real-time
-- **Score land development potential** with the 5-domain Demetra Land Score (Grade A–F)
+- **Score land development potential** with the 5-domain Site Score engine (Grade A–F)
 - **Calculate build envelopes** (GFA, NIA, Verandas, BD-Exempt) with a live 3D WebGL visualizer
 - **Identify development uplift mechanisms** (39 bonus mechanisms, Entoli 4/2024)
 - **Get official DLS 2021 valuations** with district/zone fallback benchmarks
@@ -35,7 +35,7 @@
 
 ---
 
-## Demetra Land Score
+## Site Score
 
 A composite site score (0–100) across 5 weighted domains:
 
@@ -102,7 +102,7 @@ District:  6 - PAFOS
 Village:   AKAMAS, KISSONERGA
 Parcel:    113    Block: 2    Area: 4348
 ```
-Expected: **Demetra Score 72/100 · Grade B** · Land Market Index ~€2.5M · 3D building with GIA table
+Expected: **Site Score 72/100 · Grade B** · Land Market Index ~€2.5M · 3D building with GIA table
 
 ---
 
