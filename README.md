@@ -94,18 +94,6 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:3000/site-intel**
-
-### Try it with a real parcel
-```
-District:  6 - PAFOS
-Village:   AKAMAS, KISSONERGA
-Parcel:    113    Block: 2    Area: 4348
-```
-Expected: **Site Score 72/100 · Grade B** · Land Market Index ~€2.5M · 3D building with GIA table
-
----
-
 ## Data Sources
 
 All data comes from **official government sources**:
@@ -137,11 +125,3 @@ All data comes from **official government sources**:
 > **PDF Export** — The one-click PDF report feature is not yet implemented. Currently the platform exports a basic `.txt` summary. A full structured PDF report is planned for a future release.
 
 ---
-
-## License
-
-MIT License — © 2025 [Panayiotis Chrysostomou](https://github.com/pchrysostomou)
-
----
-
-*Land Registry data: Department of Lands and Surveys, Republic of Cyprus*
