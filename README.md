@@ -120,6 +120,18 @@ All data comes from **official government sources**:
 
 ---
 
+## Roadmap
+
+- [ ] PDF report — structured one-click export (in progress)
+- [ ] Live GIS environmental layers (Natura 2000, flood zones via WMS)
+- [ ] Multi-parcel portfolio comparison
+- [ ] AI-powered development brief generator
+- [ ] Saved sessions & search history
+- [ ] API key authentication for professional access
+- [ ] Cloud deployment (Vercel + Railway)
+
+---
+
 ## Known Limitations
 
 > **PDF Export** — The one-click PDF report feature is not yet implemented. Currently the platform exports a basic `.txt` summary. A full structured PDF report is planned for a future release.
