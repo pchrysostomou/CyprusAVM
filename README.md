@@ -1,89 +1,94 @@
-# CyprusAVM — Αυτοματοποιημένη Εκτίμηση & Ανάλυση Βιωσιμότητας Ακινήτων Κύπρου
+# CyprusAVM — Site Intelligence Platform
 
-> **Το πρώτο ολοκληρωμένο σύστημα κτηματολογικής ανάλυσης και εκτίμησης βιωσιμότητας ανάπτυξης για την Κύπρο — με live ενσωμάτωση DLS REST API, Demetra Scoring Engine, 3D Building Massing και Development Appraisal.**
+> **The first comprehensive land assessment and development feasibility platform for Cyprus — featuring live DLS REST API integration, Demetra Land Scoring Engine, 3D Build Envelope Calculator, and Investment Analysis.**
 
----
-
-## 🏗️ Τι Είναι
-
-Το **CyprusAVM** είναι μια full-stack web εφαρμογή που επιτρέπει σε επαγγελματίες του real estate, developers και επενδυτές να:
-
-- **Εντοπίσουν οποιοδήποτε τεμάχιο** στην Κύπρο μέσω του Κτηματολογίου (DLS) real-time
-- **Αναλύσουν την αναπτυξιακή βιωσιμότητα** με 5-domain Demetra Scoring Engine (Grade A–F)
-- **Υπολογίσουν το κτηριακό μάζωμα** (GFA, NIA, Verandas, BD-Exempt) με 3D visualization
-- **Αξιολογήσουν κίνητρα ανάπτυξης** (39 μηχανισμοί, Εντολή 4/2024)
-- **Λάβουν εκτίμηση DLS 2021** με fallback district/zone benchmarks
-- **Δουν χρηματοοικονομική ανάλυση** (ROI, GDV, Development Cost)
+[![Live DLS API](https://img.shields.io/badge/DLS%20API-Live-brightgreen)](https://eservices.dls.moi.gov.cy)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Python%203.13-009688)](https://fastapi.tiangolo.com)
 
 ---
 
-## 🧩 Modules
+## What It Does
 
-| # | Module | Περιγραφή |
-|---|--------|-----------|
-| 1 | **Parcel Search** | Live DLS REST API — αναζήτηση με Επαρχία / Χωριό / Αριθμό Τεμαχίου |
-| 2 | **Land Deductions** | Αφαιρέσεις Δρόμων, Πρασίνου, Κοινότητας per Τοπικό Σχέδιο |
-| 3 | **Building Massing** | GFA/NIA υπολογισμός + Three.js 3D Viewer + GIA Floor Schedule |
-| 4 | **Incentives Engine** | 39 μηχανισμοί αύξησης ΣΔ (Εντολή 4/2024, Τοπικά Σχέδια) |
-| 5 | **Cadastral Map** | Leaflet satellite map με GeoJSON polygon τεμαχίου |
-| 6 | **Development Appraisal** | GDV, κόστος ανάπτυξης, ROI, break-even ανάλυση |
-| 7 | **DLS Valuation** | Γενική Εκτίμηση 2021 + District/Zone fallback benchmarks |
+**CyprusAVM** is a full-stack platform that enables real estate professionals, developers, and investors to:
+
+- **Look up any parcel** in Cyprus via the Land Registry (DLS) in real-time
+- **Score land development potential** with the 5-domain Demetra Land Score (Grade A–F)
+- **Calculate build envelopes** (GFA, NIA, Verandas, BD-Exempt) with a live 3D WebGL visualizer
+- **Identify development uplift mechanisms** (39 bonus mechanisms, Entoli 4/2024)
+- **Get official DLS 2021 valuations** with district/zone fallback benchmarks
+- **Run investment analysis** using the Residual Land Value method (GDV, ROI, break-even)
 
 ---
 
-## 🎯 Demetra Scoring Engine
+## Modules
 
-Σύνθετη βαθμολογία (0–100) σε 5 domains:
+| Module | Name | Description |
+|--------|------|-------------|
+| 1 | **Property Lookup** | Live DLS REST API — search by District / Village / Parcel Number |
+| 2 | **Net Area Calculator** | Road, green space, and community deductions per Local Plan |
+| 3 | **Build Envelope Calculator** | GFA/NIA calc + Three.js 3D viewer + GIA Floor Schedule |
+| 4 | **Development Uplift** | 39 bonus mechanisms (Entoli 4/2024, Local Plans, Housing 2025) |
+| 5 | **Satellite Map** | Leaflet with DLS cadastral GeoJSON polygon + satellite tiles |
+| 6 | **Investment Analysis** | GDV, construction cost, ROI, residual land value method |
+| 7 | **Land Market Index** | DLS General Valuation 2021 + district/zone fallback (€/m²) |
+
+---
+
+## Demetra Land Score
+
+A composite site score (0–100) across 5 weighted domains:
 
 ```
-Harvest Score = Ζώνη×30% + Κίνδυνοι×25% + Περιβάλλον×20% + Υποδομές×15% + Περιοχή×10%
+Score = Zoning×30% + Hazards×25% + Environment×20% + Infrastructure×15% + Site Context×10%
 ```
 
-| Domain | Βάρος | Παράγοντες |
-|--------|-------|------------|
-| Ζώνη & Χρήσεις | 30% | Zone code, τύπος τεμαχίου, πυκνότητα |
-| Φυσικοί Κίνδυνοι | 25% | Πλημμύρα, Σεισμός (EC8), Κατολισθήσεις |
-| Περιβάλλον | 20% | Natura 2000, ΦΒ Απαγόρευση, Προστατευόμενες Ζώνες |
-| Υποδομές | 15% | Νερό, ΑΗΚ, Οπτική Ίνα, Αποχέτευση |
-| Περιοχή | 10% | Τουρισμός, Πρόσβαση, Αστική Εγγύτητα |
+| Domain | Weight | Factors |
+|--------|--------|---------|
+| Zoning & Land Use | 30% | Zone code, parcel type, density ratio |
+| Physical Hazards | 25% | Flood risk, Seismic zone (EC8), Landslides |
+| Environment | 20% | Natura 2000, PV restrictions, Protected areas |
+| Infrastructure | 15% | Water, EAC grid, Fibre, Sewer |
+| Site Context | 10% | Tourism, coastal access, urban proximity |
+
+**Grade thresholds:** A (≥85) · B (≥70) · C (≥55) · D (≥40) · F (<40)
 
 ---
 
-## 🗺️ Χάρτης & 3D
+## 3D Build Envelope
 
-- **Leaflet** satellite/dark tile switcher με GeoJSON parcel overlay
-- **Three.js WebGL** 3D building massing:
-  - Drag-to-orbit camera controls
-  - Perspective / Front / Side / Top views
-  - Real-time GIA Floor Schedule (Ground + Floors + Verandas + BD-Exempt)
-  - NIA Estimate (82.2%)
+- **Three.js WebGL** rendering with drag-to-orbit camera controls
+- **4 camera presets:** Perspective · Front · Side · Top
+- **GIA Floor Schedule** (Ground + Floors + Verandas + BD-Exempt areas)
+- **NIA Estimate** at 82.2% of GFA
+- Real-time slider controls for veranda % and floor height
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 ### Frontend
-| | |
+| Technology | Purpose |
 |---|---|
-| Framework | Next.js 15 (App Router, TypeScript) |
-| Styling | Vanilla CSS (design tokens, glassmorphism dark theme) |
-| Map | Leaflet.js (dynamic SSR-safe import) |
-| 3D | Three.js (dynamic import, WebGL renderer) |
-| Icons | Lucide React |
+| Next.js 15 (App Router) | React framework, TypeScript |
+| Vanilla CSS | Design tokens, glassmorphism dark theme |
+| Leaflet.js | Cadastral satellite map (SSR-safe dynamic import) |
+| Three.js | WebGL 3D build envelope visualizer |
+| Lucide React | Icon system |
 
 ### Backend
-| | |
+| Technology | Purpose |
 |---|---|
-| Framework | FastAPI (Python 3.13) |
-| HTTP Client | httpx (async) |
-| Data Sources | DLS REST API, ArcGIS Cadastral Map |
-| Encoding | windows-1253 → UTF-8 fix για Greek text |
+| FastAPI (Python 3.13) | REST API, async proxy to DLS |
+| httpx | Async HTTP client |
+| DLS REST API | Official Cyprus Land Registry data |
+| ArcGIS REST | Cadastral GeoJSON parcel geometry |
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-### Προαπαιτούμενα
+### Requirements
 - Node.js 18+
 - Python 3.11+
 
@@ -101,78 +106,116 @@ npm install
 npm run dev
 ```
 
-Άνοιξε **http://localhost:3000/feasibility**
+Open **http://localhost:3000/site-intel**
+
+### Try it with a real parcel
+```
+District:  6 - PAFOS
+Village:   AKAMAS, KISSONERGA
+Parcel:    113
+Block:     2
+Area:      4348
+```
+
+Expected: **Demetra Score 72/100 · Grade B** · Land Market Index ~€2.5M · 3D building with GIA table
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
-| Endpoint | Περιγραφή |
-|----------|-----------|
-| `GET /api/dls/villages/{dist_code}` | Λίστα χωριών ανά επαρχία |
-| `GET /api/dls/search-parcel` | Αναζήτηση τεμαχίου |
-| `GET /api/dls/full-parcel/{sbpi}` | Πλήρη δεδομένα τεμαχίου + αξία |
-| `GET /api/dls/parcel-geometry` | GeoJSON geometry για χάρτη |
-| `GET /api/dls/land-assessment` | Demetra Scoring (5 domains) |
-| `GET /api/dls/market-value` | Market value + development appraisal |
-| `GET /api/dls/deduction-rules/{dist_code}` | Κανόνες αφαιρέσεων ανά επαρχία |
-
----
-
-## 🏛️ Δεδομένα
-
-Όλα τα δεδομένα προέρχονται από **επίσημες κυβερνητικές πηγές**:
-
-- **[DLS REST API](https://eservices.dls.moi.gov.cy)** — Τμήμα Κτηματολογίου & Χωρομετρίας
-- **[ArcGIS Cadastral Map](https://www.dls.moi.gov.cy)** — GeoJSON boundaries
-- **DLS Γενική Εκτίμηση 2021** — Επίσημες αξίες ακινήτων
-- **Τοπικά Σχέδια Κύπρου** — Κανόνες Δόμησης & Κίνητρα
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/dls/villages/{dist_code}` | Village list by district |
+| GET | `/api/dls/search-parcel` | Find parcel by number |
+| GET | `/api/dls/full-parcel/{sbpi}` | Full parcel data + valuation |
+| GET | `/api/dls/parcel-geometry` | GeoJSON polygon for map |
+| GET | `/api/dls/land-assessment` | Demetra Score (5 domains) |
+| GET | `/api/dls/market-value` | Market value + appraisal data |
+| GET | `/api/dls/deduction-rules/{dist_code}` | Land deduction rules by district |
+| GET | `/api/zones/lookup` | Zone code database lookup |
+| GET | `/api/zones/incentives` | Eligible uplift mechanisms |
 
 ---
 
-## 📁 Δομή Project
+## Data Sources
+
+All data comes from **official government sources**:
+
+| Source | Data |
+|--------|------|
+| [DLS REST API](https://eservices.dls.moi.gov.cy) | Parcel records, zone codes, ownership |
+| [ArcGIS Cadastral Map](https://www.dls.moi.gov.cy) | GeoJSON parcel boundaries |
+| DLS General Valuation 2021 | Official land value benchmarks |
+| Cyprus Local Plans | Building density rules & incentives |
+| Entoli 4/2024 | BD bonus mechanism legal basis |
+
+---
+
+## Project Structure
 
 ```
 CyprusAVM/
 ├── frontend/
 │   ├── app/
-│   │   ├── feasibility/          # Κύρια σελίδα ανάλυσης
-│   │   │   ├── page.tsx          # 7 modules orchestration
-│   │   │   ├── MapPanel.tsx      # Leaflet cadastral map
-│   │   │   ├── Building3DView.tsx # Three.js 3D massing
-│   │   │   ├── BuildingMassing.tsx
-│   │   │   ├── IncentivesEngine.tsx
-│   │   │   ├── DevelopmentAppraisal.tsx
-│   │   │   └── components.tsx    # Shared UI components
-│   │   ├── estimate/             # Quick valuation tool
-│   │   ├── market/               # Market analytics
-│   │   └── globals.css           # Design system tokens
+│   │   ├── site-intel/               # Main analysis page
+│   │   │   ├── page.tsx              # 7-module orchestration
+│   │   │   ├── MapPanel.tsx          # Leaflet cadastral map
+│   │   │   ├── Building3DView.tsx    # Three.js 3D visualizer
+│   │   │   ├── BuildingMassing.tsx   # Build envelope calculator
+│   │   │   ├── IncentivesEngine.tsx  # Uplift mechanisms
+│   │   │   ├── DevelopmentAppraisal.tsx  # ROI / investment analysis
+│   │   │   └── components.tsx        # Shared UI components
+│   │   ├── estimate/                 # Quick AVM valuation tool
+│   │   ├── market/                   # Market analytics dashboard
+│   │   └── globals.css               # Design system tokens
 │   └── components/
 │       └── Navbar.tsx
 └── backend/
     └── app/
         ├── main.py
         └── routers/
-            └── dls.py            # All DLS API integrations
+            ├── dls.py                # DLS API proxy + Demetra engine
+            └── zones.py              # Zone DB + incentives engine
 ```
 
 ---
 
-## 🔮 Roadmap
+## Key Technical Details
 
-- [ ] PDF Report generation (react-pdf)
-- [ ] Real-time GIS environmental layers (Natura 2000, Flood zones)
-- [ ] Multi-parcel comparison
-- [ ] AI-powered development brief generator
-- [ ] Saved sessions & history
-- [ ] API key authentication for professional access
+### Demetra Score Calibration
+The scoring engine is calibrated against verified district benchmarks:
+- **Paphos (District 6)**: Hazards=90, Environment=90, Infrastructure=90, Site=85
+- Seismic zone classification per **Eurocode 8**
+- Natura 2000 overlap detection per district
+- PV restriction zones mapped per Cyprus Town Planning regulations
+
+### DLS Valuation Fallback
+When the DLS API returns `null` for field/rural parcels, the system falls back to **DLS 2021 district/zone benchmarks** (e.g. €575/m² for Κα zone in Paphos), clearly labelled as an estimate.
+
+### Greek Character Encoding
+DLS API responses use **Windows-1253** encoding. The backend proxy decodes to UTF-8 before forwarding to the frontend.
+
+### Leaflet SSR Safety
+`MapPanel` is loaded via Next.js `dynamic()` with `ssr: false` to prevent `window is not defined` errors during server-side rendering.
 
 ---
 
-## 📄 License
+## Roadmap
+
+- [ ] PDF report generation (react-pdf or Playwright)
+- [ ] Real GIS environmental layers (Natura 2000, flood zones via WMS)
+- [ ] Multi-parcel portfolio comparison
+- [ ] AI development brief generator
+- [ ] Saved sessions & search history
+- [ ] API key authentication for professional access
+- [ ] Vercel/Railway deployment with environment config
+
+---
+
+## License
 
 MIT License — © 2025 [Panayiotis Chrysostomou](https://github.com/pchrysostomou)
 
 ---
 
-*Δεδομένα DLS: Τμήμα Κτηματολογίου & Χωρομετρίας, Κυπριακή Δημοκρατία*
+*Land Registry data: Department of Lands and Surveys, Republic of Cyprus*

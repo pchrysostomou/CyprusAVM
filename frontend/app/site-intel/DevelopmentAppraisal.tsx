@@ -72,9 +72,9 @@ export default function DevelopmentAppraisal({ distCode, netArea, baseBd, dlsVal
 
   return (
     <div className="card" style={{ overflow: "hidden" }}>
-      <ModuleHeader icon={<TrendingUp size={16} />} title="Module 6 — Valuation Evidence & Development Appraisal" color="#10B981"
+      <ModuleHeader icon={<TrendingUp size={16} />} title="Investment Analysis \u2014 Residual Land Value & ROI" color="#10B981"
         badge={roi > 0 ? `ROI ${roi}%` : undefined}
-        sub="Residual Land Value Method · District market rates · Enter comparable evidence" />
+        sub="Residual Land Value Method \u00b7 District market rates \u00b7 Enter comparable evidence" />
       <div style={{ padding: 20 }}>
 
         {/* User inputs */}

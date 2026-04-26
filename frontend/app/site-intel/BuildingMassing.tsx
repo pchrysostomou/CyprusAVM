@@ -67,7 +67,7 @@ export default function BuildingMassing({ netArea, baseBd, coverage, maxFloors, 
 
   return (
     <div className="card" style={{ overflow: "hidden" }}>
-      <ModuleHeader icon={<Building2 size={16} />} title="Module 3 — Building Massing (GFA / NIA / Floor Stack / 3D)" color="#6366F1"
+      <ModuleHeader icon={<Building2 size={16} />} title="Build Envelope Calculator — GFA / NIA / 3D Massing" color="#6366F1"
         badge={b ? `${b.floors} Floors · ${b.achieved_gfa}m² GFA` : loading ? "Calculating..." : undefined}
         sub="Εντολή 4/2024 · BD Exclusions · Covered Verandas · Binding Constraint" />
       <div style={{ padding: 20 }}>

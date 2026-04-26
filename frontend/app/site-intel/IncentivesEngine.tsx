@@ -117,9 +117,9 @@ export default function IncentivesEngine({ zoneCode, zoneType, baseBd, netArea, 
 
   return (
     <div className="card" style={{ overflow: "hidden" }}>
-      <ModuleHeader icon={<Zap size={16} />} title="Module 4 — Development Incentives Engine (39 Mechanisms)" color="#F59E0B"
+      <ModuleHeader icon={<Zap size={16} />} title="Development Uplift — Bonus Mechanisms & Incentives" color="#F59E0B"
         badge={totalBonus > 0 ? `+${totalBonus}% BD Active` : `${eligible.length} Eligible`}
-        sub="Εντολή 4/2024 · KDP 89/2015 · Housing 2025 · RES Order 4/2025 — Toggle to apply bonus" />
+        sub="Entoli 4/2024 · KDP 89/2015 · Housing 2025 · RES Order 4/2025 — Toggle to apply bonus" />
       <div style={{ padding: 20 }}>
         {loading && <div style={{ textAlign: "center", color: "var(--text-muted)", fontSize: 13, padding: 20 }}>Φόρτωση κινήτρων...</div>}
 

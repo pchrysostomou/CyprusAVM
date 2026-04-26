@@ -38,11 +38,11 @@ export default function Navbar() {
             Αγορά
           </Link>
           <Link
-            href="/feasibility"
-            id="nav-feasibility"
-            className={`nav-link ${pathname === "/feasibility" ? "active" : ""}`}
+            href="/site-intel"
+            id="nav-site-intel"
+            className={`nav-link ${pathname === "/site-intel" ? "active" : ""}`}
           >
-            Feasibility
+            Site Intel
           </Link>
         </div>
 

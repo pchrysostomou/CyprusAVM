@@ -18,7 +18,7 @@ const DISTRICTS = [
   { value: "6", label: "6 - PAFOS" },
 ];
 
-export default function FeasibilityPage() {
+export default function SiteIntelPage() {
   const [district, setDistrict] = useState("");
   const [villages, setVillages] = useState<any[]>([]);
   const [villageName, setVillageName] = useState("");
@@ -100,10 +100,10 @@ export default function FeasibilityPage() {
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                 <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--success)", boxShadow: "0 0 6px var(--success)", display: "inline-block" }} />
-                <span style={{ fontSize: 11, color: "var(--success)", fontWeight: 700, letterSpacing: "0.06em" }}>LIVE · DLS REST API · Δεδομένα Κτηματολογίου · Demetra Engine</span>
+                <span style={{ fontSize: 11, color: "var(--success)", fontWeight: 700, letterSpacing: "0.06em" }}>LIVE · Cyprus Land Registry (DLS) · Demetra Engine · Real-Time</span>
               </div>
-              <h1 style={{ fontSize: "clamp(18px,2.5vw,28px)", marginBottom: 4 }}>CyprusAVM — Κτηματολογική Ανάλυση & Βιωσιμότητα Ανάπτυξης</h1>
-              <p style={{ color: "var(--text-secondary)", fontSize: 12 }}>Demetra Score · Building Massing · Incentives Engine · DLS Market Appraisal</p>
+              <h1 style={{ fontSize: "clamp(18px,2.5vw,28px)", marginBottom: 4 }}>CyprusAVM — Site Intelligence Platform</h1>
+              <p style={{ color: "var(--text-secondary)", fontSize: 12 }}>Demetra Land Score · Build Envelope Calculator · Uplift Mechanisms · Investment Analysis</p>
             </div>
             {result && (
               <button onClick={() => {
@@ -123,7 +123,7 @@ export default function FeasibilityPage() {
 
           {/* MODULE 1: SEARCH */}
           <div className="card">
-            <ModuleHeader icon={<Search size={15} />} title="Module 1 — Parcel Search (DLS Cadastral)" />
+            <ModuleHeader icon={<Search size={15} />} title="Property Lookup — Cyprus Land Registry (DLS)" />
             <div style={{ padding: 20 }}>
               <form onSubmit={handleSearch} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 <div className="grid-2">
@@ -169,9 +169,9 @@ export default function FeasibilityPage() {
 
           {result && (
             <>
-              {/* PARCEL IDENTITY — Athena style */}
+              {/* PROPERTY RECORD */}
               <div className="card">
-                <ModuleHeader icon={<Building size={15} />} title="Parcel Identity" color="var(--accent)" badge={`SBPI: ${result.sbpi}`} />
+                <ModuleHeader icon={<Building size={15} />} title="Property Record" color="var(--accent)" badge={`SBPI: ${result.sbpi}`} />
                 <div style={{ padding: 16 }}>
                   {/* Top stats */}
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))", gap: 10, marginBottom: 14 }}>
@@ -220,19 +220,19 @@ export default function FeasibilityPage() {
 
               {/* MAP */}
               <div className="card">
-                <ModuleHeader icon={<Building size={15} />} title="Cadastral Map — DLS + ESRI Satellite" color="#F59E0B"
+                <ModuleHeader icon={<Building size={15} />} title="Satellite Map — Cyprus Cadastral Registry"
                   badge={geojson?.features?.length > 0 ? "✓ Parcel Located" : mapLoading ? "Loading..." : "Awaiting parcel"} />
                 <div style={{ padding: 12 }}>
                   <MapPanel key={result?.sbpi ?? "map"} geojson={geojson} loading={mapLoading} />
                 </div>
               </div>
 
-              {/* LAND ASSESSMENT — Demetra style */}
+              {/* DEMETRA LAND SCORE */}
               {assessment && (
                 <div className="card">
-                  <ModuleHeader icon={<Activity size={15} />} title="Land Assessment — Demetra Scoring Engine" color="#8B5CF6"
+                  <ModuleHeader icon={<Activity size={15} />} title="Demetra Land Score — 5-Domain Site Assessment" color="#8B5CF6"
                     badge={`Grade ${assessment.grade} · ${assessment.harvestScore}/100`}
-                    sub={`5 domains · ${assessment.layersChecked || 16} layers checked`} />
+                    sub={`5 domains · ${assessment.layersChecked || 16} data layers`} />
                   <div style={{ padding: 16 }}>
                     {/* Score banner */}
                     <div style={{ display: "flex", gap: 20, alignItems: "center", background: "var(--bg-secondary)", border: "1px solid var(--border)", borderRadius: 10, padding: 16, marginBottom: 16 }}>
@@ -278,7 +278,7 @@ export default function FeasibilityPage() {
                 </div>
               )}
 
-              {/* MODULE 3: BUILDING MASSING */}
+              {/* BUILD ENVELOPE CALCULATOR */}
               <BuildingMassing
                 netArea={netArea ?? null}
                 baseBd={effectiveBd ?? null}
@@ -288,7 +288,7 @@ export default function FeasibilityPage() {
                 bonusBdPct={bonusBdPct}
               />
 
-              {/* MODULE 4: INCENTIVES */}
+              {/* DEVELOPMENT UPLIFT — Bonus Mechanisms */}
               <IncentivesEngine
                 zoneCode={result.zoneCode ?? null}
                 zoneType={zoneDB?.zone_type}
@@ -299,7 +299,7 @@ export default function FeasibilityPage() {
                 onBonusChange={(pct) => setBonusBdPct(pct)}
               />
 
-              {/* MODULE 6: DEVELOPMENT APPRAISAL */}
+              {/* INVESTMENT ANALYSIS */}
               <DevelopmentAppraisal
                 distCode={district}
                 netArea={netArea ?? null}
@@ -309,13 +309,13 @@ export default function FeasibilityPage() {
                 nia={netArea && effectiveBd ? Math.round(netArea * effectiveBd * (1 + bonusBdPct / 100) * 0.822) : null}
               />
 
-              {/* MODULE 7: DLS OFFICIAL VALUATION */}
+              {/* LAND MARKET INDEX — DLS Valuation */}
               <div className="card card-glow">
                 <ModuleHeader icon={<Building size={15} />}
-                  title="Module 7 — DLS General Valuation 2021"
+                  title="Land Market Index — DLS General Valuation 2021"
                   color="var(--success)"
                   badge={dlsVal ? `€${dlsVal.toLocaleString("el-GR")}` : "Loading..."}
-                  sub={valSource ?? "DLS Γενική Εκτίμηση"} />
+                  sub={valSource ?? "Cyprus DLS Official Benchmark"} />
                 <div style={{ padding: 24 }}>
                   {dlsVal ? (
                     <>
