@@ -108,18 +108,6 @@ npm run dev
 
 Open **http://localhost:3000/site-intel**
 
-### Try it with a real parcel
-```
-District:  6 - PAFOS
-Village:   AKAMAS, KISSONERGA
-Parcel:    113
-Block:     2
-Area:      4348
-```
-
-Expected: **Demetra Score 72/100 · Grade B** · Land Market Index ~€2.5M · 3D building with GIA table
-
----
 
 ## API Endpoints
 
@@ -211,11 +199,3 @@ DLS API responses use **Windows-1253** encoding. The backend proxy decodes to UT
 - [ ] Vercel/Railway deployment with environment config
 
 ---
-
-## License
-
-MIT License — © 2025 [Panayiotis Chrysostomou](https://github.com/pchrysostomou)
-
----
-
-*Land Registry data: Department of Lands and Surveys, Republic of Cyprus*
