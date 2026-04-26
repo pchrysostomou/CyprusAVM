@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+@import 'leaflet/dist/leaflet.css';
+
 
 /* =====================
    DESIGN TOKENS
@@ -606,4 +608,23 @@ h1, h2, h3, h4, h5 {
     margin-top: 20px;
     page-break-inside: avoid;
   }
+}
+
+/* =====================
+   LEAFLET MAP OVERRIDES
+   Fix tile rendering issues
+   ===================== */
+.leaflet-container {
+  background: #0d1117 !important;
+  font-family: 'Inter', sans-serif;
+}
+.leaflet-tile {
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+.leaflet-tile-pane {
+  opacity: 1 !important;
+}
+.leaflet-container img.leaflet-tile {
+  mix-blend-mode: normal;
 }

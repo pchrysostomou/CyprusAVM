@@ -1,78 +1,178 @@
-# CyprusAVM 🇨🇾🏡
+# CyprusAVM — Αυτοματοποιημένη Εκτίμηση & Ανάλυση Βιωσιμότητας Ακινήτων Κύπρου
 
-> **CyprusAVM** is the first Automated Valuation Model (AVM) MVP built specifically for the Cyprus real estate market.
-
-CyprusAVM uses a powerful **XGBoost Machine Learning** backend, trained on robust market data (with features like proximity to the sea, property type, age depreciation, and tourism zones), to predict property values across Cyprus municipalities with high confidence. It provides a sleek, modern **Next.js** dark-themed Single Page Application (SPA) to generate elegant PDF reports instantly.
+> **Το πρώτο ολοκληρωμένο σύστημα κτηματολογικής ανάλυσης και εκτίμησης βιωσιμότητας ανάπτυξης για την Κύπρο — με live ενσωμάτωση DLS REST API, Demetra Scoring Engine, 3D Building Massing και Development Appraisal.**
 
 ---
 
-## 🌟 Key Features
+## 🏗️ Τι Είναι
 
-*   **Accurate ML Valuations:** Predicts property prices utilizing an XGBoost regression model with a historical MAPE of < 12%.
-*   **Real-time Confidence Intervals:** Factors in comparable sales volume to dynamically predict valuation ranges and assign confidence levels.
-*   **Aesthetic & Modern UI:** A glassmorphic, premium dark theme built on Next.js designed specifically to "wow" real estate clients and agencies.
-*   **Instant PDF Reports:** Produces detailed, client-ready valuation reports (with disclaimers) that can be downloaded straight from the browser.
-*   **Fully Dockerized:** Seamlessly deploy the entire stack (FastAPI Backend + Next.js Frontend) anywhere using `docker-compose`.
+Το **CyprusAVM** είναι μια full-stack web εφαρμογή που επιτρέπει σε επαγγελματίες του real estate, developers και επενδυτές να:
 
-## 🏗️ Architecture
+- **Εντοπίσουν οποιοδήποτε τεμάχιο** στην Κύπρο μέσω του Κτηματολογίου (DLS) real-time
+- **Αναλύσουν την αναπτυξιακή βιωσιμότητα** με 5-domain Demetra Scoring Engine (Grade A–F)
+- **Υπολογίσουν το κτηριακό μάζωμα** (GFA, NIA, Verandas, BD-Exempt) με 3D visualization
+- **Αξιολογήσουν κίνητρα ανάπτυξης** (39 μηχανισμοί, Εντολή 4/2024)
+- **Λάβουν εκτίμηση DLS 2021** με fallback district/zone benchmarks
+- **Δουν χρηματοοικονομική ανάλυση** (ROI, GDV, Development Cost)
+
+---
+
+## 🧩 Modules
+
+| # | Module | Περιγραφή |
+|---|--------|-----------|
+| 1 | **Parcel Search** | Live DLS REST API — αναζήτηση με Επαρχία / Χωριό / Αριθμό Τεμαχίου |
+| 2 | **Land Deductions** | Αφαιρέσεις Δρόμων, Πρασίνου, Κοινότητας per Τοπικό Σχέδιο |
+| 3 | **Building Massing** | GFA/NIA υπολογισμός + Three.js 3D Viewer + GIA Floor Schedule |
+| 4 | **Incentives Engine** | 39 μηχανισμοί αύξησης ΣΔ (Εντολή 4/2024, Τοπικά Σχέδια) |
+| 5 | **Cadastral Map** | Leaflet satellite map με GeoJSON polygon τεμαχίου |
+| 6 | **Development Appraisal** | GDV, κόστος ανάπτυξης, ROI, break-even ανάλυση |
+| 7 | **DLS Valuation** | Γενική Εκτίμηση 2021 + District/Zone fallback benchmarks |
+
+---
+
+## 🎯 Demetra Scoring Engine
+
+Σύνθετη βαθμολογία (0–100) σε 5 domains:
 
 ```
-CyprusAVM/
-│
-├── backend/                  # Python / FastAPI / XGBoost
-│   ├── app/                  # API Routers & Schemas
-│   ├── data/                 # Market Data (CSVs)
-│   ├── models/               # Serialized ML Models (.pkl)
-│   └── scripts/              # Training & Data synthetic generation logic
-│
-├── frontend/                 # Next.js 14 / React
-│   ├── app/                  # App Router Pages
-│   ├── components/           # UI Components
-│   └── lib/                  # API Client Configs
-│
-└── docker-compose.yml        # Orchestration
+Harvest Score = Ζώνη×30% + Κίνδυνοι×25% + Περιβάλλον×20% + Υποδομές×15% + Περιοχή×10%
 ```
 
-## 🚀 Getting Started
+| Domain | Βάρος | Παράγοντες |
+|--------|-------|------------|
+| Ζώνη & Χρήσεις | 30% | Zone code, τύπος τεμαχίου, πυκνότητα |
+| Φυσικοί Κίνδυνοι | 25% | Πλημμύρα, Σεισμός (EC8), Κατολισθήσεις |
+| Περιβάλλον | 20% | Natura 2000, ΦΒ Απαγόρευση, Προστατευόμενες Ζώνες |
+| Υποδομές | 15% | Νερό, ΑΗΚ, Οπτική Ίνα, Αποχέτευση |
+| Περιοχή | 10% | Τουρισμός, Πρόσβαση, Αστική Εγγύτητα |
 
-### Prerequisites
-- Docker & Docker Compose
-- Node.js 20+ (for local frontend development)
-- Python 3.11+ (for local backend development)
+---
 
-### 1. Run with Docker (Recommended)
-Simply spin up the orchestrated containers.
-```bash
-docker-compose up --build
-```
-*   **Frontend:** http://localhost:3000
-*   **Backend API Docs:** http://localhost:8000/docs
+## 🗺️ Χάρτης & 3D
 
-### 2. Run Locally (Dev Mode)
+- **Leaflet** satellite/dark tile switcher με GeoJSON parcel overlay
+- **Three.js WebGL** 3D building massing:
+  - Drag-to-orbit camera controls
+  - Perspective / Front / Side / Top views
+  - Real-time GIA Floor Schedule (Ground + Floors + Verandas + BD-Exempt)
+  - NIA Estimate (82.2%)
 
-**Backend:**
+---
+
+## ⚙️ Tech Stack
+
+### Frontend
+| | |
+|---|---|
+| Framework | Next.js 15 (App Router, TypeScript) |
+| Styling | Vanilla CSS (design tokens, glassmorphism dark theme) |
+| Map | Leaflet.js (dynamic SSR-safe import) |
+| 3D | Three.js (dynamic import, WebGL renderer) |
+| Icons | Lucide React |
+
+### Backend
+| | |
+|---|---|
+| Framework | FastAPI (Python 3.13) |
+| HTTP Client | httpx (async) |
+| Data Sources | DLS REST API, ArcGIS Cadastral Map |
+| Encoding | windows-1253 → UTF-8 fix για Greek text |
+
+---
+
+## 🚀 Quick Start
+
+### Προαπαιτούμενα
+- Node.js 18+
+- Python 3.11+
+
+### Backend
 ```bash
 cd backend
 pip install -r requirements.txt
-python -m uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8000
 ```
 
-**Frontend:**
+### Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-## ⚠️ Production vs MVP (Important)
+Άνοιξε **http://localhost:3000/feasibility**
 
-> Please note that the current data inside this repository is **100% synthetic/fake**, generated exclusively for MVP demonstration purposes. The valuations returned right now represent the algorithm's functional logic, not real Cyprus market prices.
+---
 
-To take this platform to production as a SaaS, you should:
-1. **Incorporate Real Data:** Replace `backend/data/synthetic_properties.csv` with your proprietary dataset, and run `python backend/scripts/train_model.py`. The platform will automatically relearn, adjust encoding logic, and generate a new precision `xgboost.pkl` file!
-2. **Add a Payment Flow:** For B2B monetization, insert a standard **Stripe / PayPal Purchase Button** at the end of the valuation loading phase. The user should pay the fee *before* the precise result and the PDF report are revealed.
-3. **Refine PDF Generation:** The current PDF Export is an MVP native-print workaround and is **not yet production-ready**. A final SaaS version should feature a programmatic backend PDF generator (e.g., using Python ReportLab/WeasyPrint) to deliver a highly structured and heavily branded official document.
+## 📡 API Endpoints
+
+| Endpoint | Περιγραφή |
+|----------|-----------|
+| `GET /api/dls/villages/{dist_code}` | Λίστα χωριών ανά επαρχία |
+| `GET /api/dls/search-parcel` | Αναζήτηση τεμαχίου |
+| `GET /api/dls/full-parcel/{sbpi}` | Πλήρη δεδομένα τεμαχίου + αξία |
+| `GET /api/dls/parcel-geometry` | GeoJSON geometry για χάρτη |
+| `GET /api/dls/land-assessment` | Demetra Scoring (5 domains) |
+| `GET /api/dls/market-value` | Market value + development appraisal |
+| `GET /api/dls/deduction-rules/{dist_code}` | Κανόνες αφαιρέσεων ανά επαρχία |
+
+---
+
+## 🏛️ Δεδομένα
+
+Όλα τα δεδομένα προέρχονται από **επίσημες κυβερνητικές πηγές**:
+
+- **[DLS REST API](https://eservices.dls.moi.gov.cy)** — Τμήμα Κτηματολογίου & Χωρομετρίας
+- **[ArcGIS Cadastral Map](https://www.dls.moi.gov.cy)** — GeoJSON boundaries
+- **DLS Γενική Εκτίμηση 2021** — Επίσημες αξίες ακινήτων
+- **Τοπικά Σχέδια Κύπρου** — Κανόνες Δόμησης & Κίνητρα
+
+---
+
+## 📁 Δομή Project
+
+```
+CyprusAVM/
+├── frontend/
+│   ├── app/
+│   │   ├── feasibility/          # Κύρια σελίδα ανάλυσης
+│   │   │   ├── page.tsx          # 7 modules orchestration
+│   │   │   ├── MapPanel.tsx      # Leaflet cadastral map
+│   │   │   ├── Building3DView.tsx # Three.js 3D massing
+│   │   │   ├── BuildingMassing.tsx
+│   │   │   ├── IncentivesEngine.tsx
+│   │   │   ├── DevelopmentAppraisal.tsx
+│   │   │   └── components.tsx    # Shared UI components
+│   │   ├── estimate/             # Quick valuation tool
+│   │   ├── market/               # Market analytics
+│   │   └── globals.css           # Design system tokens
+│   └── components/
+│       └── Navbar.tsx
+└── backend/
+    └── app/
+        ├── main.py
+        └── routers/
+            └── dls.py            # All DLS API integrations
+```
+
+---
+
+## 🔮 Roadmap
+
+- [ ] PDF Report generation (react-pdf)
+- [ ] Real-time GIS environmental layers (Natura 2000, Flood zones)
+- [ ] Multi-parcel comparison
+- [ ] AI-powered development brief generator
+- [ ] Saved sessions & history
+- [ ] API key authentication for professional access
+
+---
 
 ## 📄 License
-This project is proprietary MVP software. All rights reserved.
 
+MIT License — © 2025 [Panayiotis Chrysostomou](https://github.com/pchrysostomou)
+
+---
+
+*Δεδομένα DLS: Τμήμα Κτηματολογίου & Χωρομετρίας, Κυπριακή Δημοκρατία*

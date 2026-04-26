@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from app.routers import estimate, comparables, market, dls
+from app.routers import estimate, comparables, market, dls, zones
 
 app = FastAPI(
     title="CyprusAVM API",
@@ -36,6 +36,7 @@ app.include_router(estimate.router, prefix="/api", tags=["Valuation"])
 app.include_router(comparables.router, prefix="/api", tags=["Comparables"])
 app.include_router(market.router, prefix="/api", tags=["Market"])
 app.include_router(dls.router)
+app.include_router(zones.router)
 
 
 @app.get("/health")
